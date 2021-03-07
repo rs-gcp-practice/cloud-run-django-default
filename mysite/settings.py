@@ -40,7 +40,7 @@ if os.path.isfile(env_file):
 else:
     # Create local settings if running with CI, for unit testing
     if os.getenv("TRAMPOLINE_CI", None):
-        placeholder = f"SECRET_KEY=a\nGS_BUCKET_NAME=none\nDATABASE_URL=sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
+        placeholder = f"SECRET_KEY=a\nGS_BUCKET_NAME=none\nDATABASE_URL=sqlite://{os.path.join(BASE_DIR, 'db.sqlite3')}"
         env.read_env(io.StringIO(placeholder))
     else:
         # [START cloudrun_django_secretconfig]
@@ -118,9 +118,7 @@ DATABASES = {"default": env.db()}
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
